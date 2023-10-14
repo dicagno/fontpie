@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 const fontpie = require('fontpie-calc')
 const { program } = require('commander')
+const fs = require('fs')
 
 program
   .name('fontpie')
@@ -15,6 +16,7 @@ program
   )
   .option('-s, --style <style>', 'font-style value', 'normal')
   .option('-w, --weight <weight>', 'font-weight value', '400')
+  .option('-o, --output <weight>', 'output file path (create or append)', '')
   .option(
     '-n, --name <name>',
     'font name that will be used as `font-family` property (default: font_filename)'
@@ -33,10 +35,7 @@ program
       fontWeight
     } = fontpie(file, option)
 
-    console.log(`Here is your @font-face:
-=========================================
-
-@font-face {
+    const fontFaceCss = `@font-face {
   font-family: '${fontFamily}';
   font-style: ${fontStyle};
   font-weight: ${fontWeight};
@@ -53,13 +52,18 @@ program
   descent-override: ${descentOverride};
   line-gap-override: ${lineGapOverride};
   size-adjust: ${sizeAdjust};
-}
+}`
 
+    if (option.output && option.output !== '') fs.appendFileSync(`\n${option.output}`, fontFaceCss)
+
+    console.log(`Here is your @font-face:
+
+${fontFaceCss}
+
+/* sample usage */
 html {
   font-family: '${fontFamily}', '${fontFamily} Fallback';
-}
-
-=========================================`)
+}`)
   })
 
 program.parse()

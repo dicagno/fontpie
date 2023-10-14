@@ -76,6 +76,7 @@ Options:
   -s, --style <style>           font-style value (default: "normal")
   -w, --weight <weight>         font-weight value (default: "400")
   -n, --name <name>             font name what will be used as font-family value, by default font filename
+  -o, --output <path>           append css font face to file
   -h, --help                    display help for command
 ```
 
