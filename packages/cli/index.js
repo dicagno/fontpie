@@ -16,7 +16,7 @@ program
   )
   .option('-s, --style <style>', 'font-style value', 'normal')
   .option('-w, --weight <weight>', 'font-weight value', '400')
-  .option('-o, --output <weight>', 'output file path (create or append)', '')
+  .option('-o, --output <path>', 'output file path (create or append)', '')
   .option(
     '-n, --name <name>',
     'font name that will be used as `font-family` property (default: font_filename)'
